@@ -39,12 +39,13 @@ pipeline {
             }
         } 
         stage('Notification') {
-            steps {
-                slackSend botUser: true, 
-  		channel: '#testing', 
-  		color: '#00ff00', 
-  		message: 'Testing Jekins with Slack', 
-  		tokenCredentialId: 'slack-token'
+	   post {
+ 	       success {
+                   slackSend channel: '#testing',
+                   color: 'good',
+                   message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+    		}
+	      }
             }
         }
     }
