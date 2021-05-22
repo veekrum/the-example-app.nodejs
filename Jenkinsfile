@@ -41,7 +41,7 @@ pipeline {
         stage('Notification') {
             steps {
                 slackSend botUser: true, 
-  		channel: 'testing', 
+  		channel: '#testing', 
   		color: '#00ff00', 
   		message: 'Testing Jekins with Slack', 
   		tokenCredentialId: 'slack-token'
