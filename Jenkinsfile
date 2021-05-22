@@ -38,5 +38,14 @@ pipeline {
                 sh "docker rmi $registry:latest" 
             }
         } 
+        stage('Notification') {
+            steps {
+                slackSend botUser: true, 
+  		channel: 'testing', 
+  		color: '#00ff00', 
+  		message: 'Testing Jekins with Slack', 
+  		tokenCredentialId: 'slack-token'
+            }
+        }
     }
 }
