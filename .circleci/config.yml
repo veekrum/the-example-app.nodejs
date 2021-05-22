@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8
+      - image: circleci/node
     steps:
       - checkout
-      - restore_cache: # special step to restore the dependency cache 
-          key: dependency-cache-{{ checksum "package.json" }}
+#      - restore_cache: # special step to restore the dependency cache 
+#          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-wee
           command: npm install
@@ -20,14 +20,11 @@ jobs:
       - run:
           name: install-e2e-test
           command: cd ./test/e2e && npm install
-#      - run:
-#          name: test
-#          command: npm run test
-      - store_artifacts:
-          path: /tmp/artifact-1
+      - run:
+          name: Build and push Docker image
+          command: |
+            docker build -t $DOCKER_LOGIN/cicd_demo:latest .
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push $DOCKER_LOGIN/cicd_demo:latest 
 
-          destination: artifact-file-cypress-result_`date +%Y-%m-%d_%H-%M-%S`
-
-      - store_artifacts:
-          path: /tmp/artifacts
 
