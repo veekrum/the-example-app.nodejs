@@ -21,7 +21,8 @@ jobs:
           name: install-e2e-test
           command: cd ./test/e2e && npm install
       - run:
-          name: running test
-          command: npm test
+          name: running deployment
+          command: curl -u veekrum:11fb0ed52d92e0385d3ab9d22b1256b115 http://167.71.244.101:8080/view/QA/job/QA-cicd_deploy_demo/build?token=wefiytgwiefiweihfqweiodf
+
 
 
