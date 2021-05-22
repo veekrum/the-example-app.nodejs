@@ -38,15 +38,5 @@ pipeline {
                 sh "docker rmi $registry:latest" 
             }
         } 
-        stage('Notification') {
-	   post {
- 	       success {
-                   slackSend channel: '#testing',
-                   color: 'good',
-                   message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-    		}
-	      }
-            }
-        }
     }
 }
