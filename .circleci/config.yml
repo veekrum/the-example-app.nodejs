@@ -21,6 +21,6 @@ jobs:
       - run:
           name: install dependency
           command: cd ./test/e2e && npm install
-#      - run:
-#          name: test
-#          command: npm run test
+      - run:
+          name: test
+          command: npm run test
